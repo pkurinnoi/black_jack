@@ -16,5 +16,16 @@ class Deck
     end
     puts "New deck with #{@deck.length} cards successfully created!"
   end
+
+  def shuffle
+    @deck = @deck.shuffle()
+    puts "Deck shuffled!"
+  end
+
+  def view
+    @deck.each do |card|
+      puts card.name
+    end
+  end
 end
 
