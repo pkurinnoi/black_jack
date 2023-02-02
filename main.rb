@@ -1,8 +1,11 @@
 require_relative 'playcard'
 require_relative 'deck'
 require_relative 'controller'
+require_relative 'player'
+require_relative 'table'
+require_relative 'dealer'
 
-puts "Welcome to Black Jack game!"
+puts "Welcome to Black Jack game for up to 8 players!"
 
 controller = Controller.new
 
