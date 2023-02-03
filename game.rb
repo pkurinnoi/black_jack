@@ -45,7 +45,7 @@ class Game
     @dealer.counter.times {puts "***"}
   end
 
-  def cards_value(player)  # здесь считаем 2 цифры по сумме очков на картах получаем массив @total_value
+  def cards_value(player)  # здесь считаем 2 цифры по сумме очков на картах получаем массив @total_value #TODO Надо обработать момент с двумя/тремя тузами
     @costs = []
     @value_1 = 0
     @value_2 = 0
@@ -69,6 +69,12 @@ class Game
   end
 
   def calculator(total_value)
-
+    if total_value[0] > total_value[1] || total_value[0] < 21
+      puts "#{total_value[0]}"
+    elsif total_value[1] < 21
+      puts "#{total_value[1]}"
+    else
+      puts "You lose"
+    end
   end
 end
