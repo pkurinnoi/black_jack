@@ -19,8 +19,10 @@ class Game
     player_start
     dealer_start
     cards_viewer
-    cards_value(@player)
-    cards_value(@dealer)
+    puts "-------------------------------"
+    puts "#{@player.name} have #{@player.cards_value} in cards"
+    puts "#{@dealer.name} have #{@dealer.cards_value} in cards"
+    puts "-------------------------------"
   end
 
   def player_start
@@ -45,30 +47,4 @@ class Game
     @dealer.counter.times {puts "***"}
   end
 
-  def cards_value(player)  # здесь считаем 2 цифры по сумме очков на картах получаем массив @total_value #TODO Надо обработать момент с двумя/тремя тузами
-    @costs = []
-    @value_1 = 0
-    @value_2 = 0
-
-    player.cards.each do |card|
-        @costs <<  card.cost
-      end
-
-    @costs.each do |value|
-      if value.is_a? Array
-        @value_1 +=  value[0].to_i
-        @value_2 +=  value[1].to_i
-      else
-        @value_1 += value
-        @value_2 += value
-      end
-    end
-
-    @total_value = [@value_1, @value_2]
-    calculator(@total_value)
-  end
-
-  def calculator(total_value)
-    puts "#{total_value}"
-  end
 end
