@@ -9,6 +9,9 @@ class Player
     @counter = 0
     @cards_cost = []
     @cards = []
+
+    @costs_min = 0
+    @costs_max = 0
   end
 
   def take_card(card)
@@ -22,20 +25,33 @@ class Player
 
   def first_two_cards_value
     @costs = []
-    @total_cost = 0
 
     @cards.each do |card|
-      @costs <<  card.cost
+      @costs << card.cost
     end
 
     @costs = @costs.flatten
 
     if (@costs.max + @costs.sort[-2] > 21)
-      @total_cost = @costs.max + @costs.sort[-3]
+      @costs = @costs.max + @costs.sort[-3]
     else
-      @total_cost = @costs.max + @costs.sort[-2]
+      @costs = @costs.max + @costs.sort[-2]
+    end # проверка на 2 туза
+
+    @costs
+  end
+
+  def all_cards_value
+
+    @last_card_value = @cards.last().cost
+
+    if @last_card_value.is_a? Array
+      @costs_min = @costs + @last_card_value.min
+      @costs_max = @costs + @last_card_value.max
+    else
+      @costs = @costs + @last_card_value
     end
 
-    @total_cost
+    if
   end
 end

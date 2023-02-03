@@ -20,7 +20,6 @@ class Deck
 
   def shuffle
     @deck = @deck.shuffle()
-    puts "Deck shuffled!"
   end
 
   def view

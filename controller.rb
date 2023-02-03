@@ -14,7 +14,6 @@ class Controller
                '----------------------------'].freeze
 
   def main_menu
-    puts '> What you want to do?'
     puts(*MAIN_MENU)
   end
 
