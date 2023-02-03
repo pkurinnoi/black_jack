@@ -15,6 +15,14 @@ class Game
   end
 
   def round
+    card = @deck.take_first #берем первую карту из колоды
+    @deck.drop_first       #сбрасываем верхнюю карту из колоды
+    @player.take_card(card)
 
+    card = @deck.take_first #берем первую карту из колоды
+    @deck.drop_first       #сбрасываем верхнюю карту из колоды
+    @player.take_card(card)
+
+    @player.view_cards
   end
 end
