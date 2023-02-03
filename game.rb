@@ -20,8 +20,8 @@ class Game
     dealer_start
     cards_viewer
     puts "-------------------------------"
-    puts "#{@player.name} have #{@player.cards_value} in cards"
-    puts "#{@dealer.name} have #{@dealer.cards_value} in cards"
+    puts "#{@player.name} have #{@player.first_two_cards_value} in cards"
+    puts "#{@dealer.name} have #{@dealer.first_two_cards_value} in cards"
     puts "-------------------------------"
   end
 

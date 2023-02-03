@@ -20,34 +20,22 @@ class Player
     @cards.each {|card| puts "#{card.name}"}
   end
 
-  def cards_value  # здесь считаем 2 цифры по сумме очков на картах получаем массив @total_value #TODO Надо обработать момент с двумя/тремя тузами
+  def first_two_cards_value
     @costs = []
-    @value_1 = 0
-    @value_2 = 0
+    @total_cost = 0
 
     @cards.each do |card|
       @costs <<  card.cost
     end
 
-    @costs.each do |value|
-      if value.is_a? Array
-        @value_1 +=  value[0].to_i
-        @value_2 +=  value[1].to_i
-      else
-        @value_1 += value
-        @value_2 += value
-      end
+    @costs = @costs.flatten
+
+    if (@costs.max + @costs.sort[-2] > 21)
+      @total_cost = @costs.max + @costs.sort[-3]
+    else
+      @total_cost = @costs.max + @costs.sort[-2]
     end
 
-    @total_value = [@value_1, @value_2]
-    calculator(@total_value)
-  end
-
-  def calculator(total_value)
-    if total_value.max <= 21
-      total_value.max
-    elsif total_value.min <= 21
-      total_value.min
-    end
+    @total_cost
   end
 end
