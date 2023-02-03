@@ -3,7 +3,6 @@ require_relative 'deck'
 require_relative 'controller'
 require_relative 'player'
 require_relative 'game'
-require_relative 'dealer'
 
 puts "Welcome to Black Jack game for up to 8 players!"
 
