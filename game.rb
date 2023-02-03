@@ -18,7 +18,9 @@ class Game
   def game_controller
     player_start
     dealer_start
-    player_cards_view
+    cards_viewer
+    cards_value(@player)
+    cards_value(@dealer)
   end
 
   def player_start
@@ -35,11 +37,38 @@ class Game
     end
   end
 
-  def player_cards_view
+  def cards_viewer
     puts "Your cards:"
     @player.view_cards
     puts "Dealer cards:"
     @dealer.view_cards #TODO убрать в проде
     @dealer.counter.times {puts "***"}
+  end
+
+  def cards_value(player)  # здесь считаем 2 цифры по сумме очков на картах получаем массив @total_value
+    @costs = []
+    @value_1 = 0
+    @value_2 = 0
+
+    player.cards.each do |card|
+        @costs <<  card.cost
+      end
+
+    @costs.each do |value|
+      if value.is_a? Array
+        @value_1 +=  value[0].to_i
+        @value_2 +=  value[1].to_i
+      else
+        @value_1 += value
+        @value_2 += value
+      end
+    end
+
+    @total_value = [@value_1, @value_2]
+    calculator(@total_value)
+  end
+
+  def calculator(total_value)
+
   end
 end

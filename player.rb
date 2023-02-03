@@ -7,6 +7,7 @@ class Player
     @balance = 100
 
     @counter = 0
+    @cards_cost = []
     @cards = []
   end
 
