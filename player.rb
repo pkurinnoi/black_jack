@@ -9,9 +9,6 @@ class Player
     @counter = 0
     @cards_cost = []
     @cards = []
-
-    @costs_min = 0
-    @costs_max = 0
   end
 
   def take_card(card)
@@ -42,16 +39,5 @@ class Player
   end
 
   def all_cards_value
-
-    @last_card_value = @cards.last().cost
-
-    if @last_card_value.is_a? Array
-      @costs_min = @costs + @last_card_value.min
-      @costs_max = @costs + @last_card_value.max
-    else
-      @costs = @costs + @last_card_value
-    end
-
-    if
   end
 end
