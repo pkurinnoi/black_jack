@@ -2,6 +2,8 @@ class Player
 
   attr_accessor :name, :balance, :cards
 
+  @cards = []
+
   def initialize(name)
     @name = name
     @balance = 100

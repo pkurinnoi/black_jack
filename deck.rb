@@ -27,5 +27,13 @@ class Deck
       puts card.name
     end
   end
+
+  def take_first
+    @deck.first
+  end
+
+  def drop_first
+    @deck = @deck.drop(1)
+  end
 end
 
