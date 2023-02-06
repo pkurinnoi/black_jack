@@ -14,7 +14,7 @@ class Game
     @deck = Deck.new
     @deck.shuffle
     puts "What is your name?"
-    name = gets.chomp()
+    name = gets.chomp
     @player = Player.new(name)
     puts "Hello, #{@player.name}"
     puts "Your balance is #{@player.balance} $"
@@ -68,6 +68,8 @@ class Game
         @dealer.balance += @bank
         @bank = 0
         game_controller
+      else
+        exit!
       end
     end
   end
@@ -108,7 +110,7 @@ class Game
   end
 
   def dealer_round
-    if (@dealer.calculator < 17 && @dealer.cards.size < 3)
+    if (@dealer.calculator < 17) && (@dealer.cards.size < 3)
       @dealer.take_card(@deck.take_first)
     end
   end
