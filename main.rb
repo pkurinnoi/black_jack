@@ -4,7 +4,7 @@ require_relative 'controller'
 require_relative 'player'
 require_relative 'game'
 
-puts "Welcome to Black Jack game for up to 8 players!"
+puts "Welcome to Black Jack game!"
 
 @controller = Controller.new
 

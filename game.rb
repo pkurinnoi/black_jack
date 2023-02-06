@@ -15,8 +15,8 @@ class Game
     @deck.shuffle
     puts "What is your name?"
     name = gets.chomp()
-    @player = Player.new(name = 'Ruby')
-    puts "Hello, #{name}"
+    @player = Player.new(name)
+    puts "Hello, #{@player.name}"
     puts "Your balance is #{@player.balance} $"
     puts "------------------------------------"
     game_controller
@@ -39,7 +39,7 @@ class Game
   end
 
   def game_menu
-    if (@player.cards.length == 3 && @dealer.cards.length == 3)
+    if (@player.cards.length == 3) && (@dealer.cards.length == 3)
       puts "----------------------------"
       final
     else
@@ -94,21 +94,15 @@ class Game
   end
 
   def first_bet
-    if (@player.balance >= 10)
-      @player.balance=@player.balance - 10
-      @bank += 10
-    else
-      game_over
-    end
+    @player.balance >= 10
+    @player.balance=@player.balance - 10
+    @bank += 10
 
-    if (@dealer.balance >= 10)
-      @dealer.balance=@dealer.balance - 10
-      @bank += 10
-    else
-      game_over
-    end
+    @dealer.balance >= 10
+    @dealer.balance=@dealer.balance - 10
+    @bank += 10
 
-    puts "Ruby balance is #{@player.balance} $"
+    puts "#{@player.name} balance is #{@player.balance} $"
     puts "Dealer balance is #{@dealer.balance} $"
     puts "BANK: #{@bank} $"
   end
@@ -150,6 +144,7 @@ class Game
       elsif (21 - @player.calculator) > (21 - @dealer.calculator) # у диллера ближе к 21 чем у игрока
         dealer_wins
       elsif @player.calculator == @dealer.calculator # одинаковое количество
+        puts "****** Bank split! ******"
         @player.balance += @bank / 2
         @dealer.balance += @bank / 2
         @bank = 0
