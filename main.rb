@@ -6,12 +6,12 @@ require_relative 'game'
 
 puts "Welcome to Black Jack game for up to 8 players!"
 
-controller = Controller.new
+@controller = Controller.new
 
 loop do
-  controller.main_menu
+  @controller.main_menu
   main_menu_item = gets.to_i
   break if main_menu_item.zero?
 
-  controller.main_menu_run(main_menu_item)
+  @controller.main_menu_run(main_menu_item)
 end

@@ -6,9 +6,7 @@ class Player
     @name = name
     @balance = 100
 
-    @counter = 0
-    @cards_cost = []
-    @cards = []
+    drop_cards
   end
 
   def take_card(card)
@@ -20,24 +18,25 @@ class Player
     @cards.each {|card| puts "#{card.name}"}
   end
 
-  def first_two_cards_value
+  def calculator
     @costs = []
+    @sum = 0
 
     @cards.each do |card|
       @costs << card.cost
+      @sum += card.cost
     end
 
-    @costs = @costs.flatten
+    if (@costs.include? 1 || @sum <= 11)
+      @sum += 10
+    end
 
-    if (@costs.max + @costs.sort[-2] > 21)
-      @costs = @costs.max + @costs.sort[-3]
-    else
-      @costs = @costs.max + @costs.sort[-2]
-    end # проверка на 2 туза
-
-    @costs
+    @sum
   end
 
-  def all_cards_value
+  def drop_cards
+    @counter = 0
+    @cards_cost = []
+    @cards = []
   end
 end
