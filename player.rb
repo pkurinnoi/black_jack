@@ -2,9 +2,12 @@ class Player
 
   attr_accessor :name, :balance, :cards, :counter
 
+  START_BALANCE = 100
+  ACE_COST = 10
+
   def initialize(name)
     @name = name
-    @balance = 100
+    @balance = START_BALANCE
 
     drop_cards
   end
@@ -28,7 +31,7 @@ class Player
     end
 
     if (@costs.include? 1 || @sum <= 11)
-      @sum += 10
+      @sum += ACE_COST
     end
 
     @sum
