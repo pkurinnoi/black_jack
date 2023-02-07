@@ -15,17 +15,11 @@ class Game
   MIN_BET = 10
 
   def initialize
-    puts "Game created!"
     @bank = 0
     @dealer = Player.new('Dealer')
     @deck = Deck.new
     @deck.shuffle
-    puts "What is your name?"
-    name = gets.chomp
-    @player = Player.new(name)
-    puts "Hello, #{@player.name}"
-    puts "Your balance is #{@player.balance} $"
-    puts "------------------------------------"
+    get_name
     game_controller
   end
 
@@ -79,6 +73,15 @@ class Game
         exit!
       end
     end
+  end
+
+  def get_name
+    puts "What is your name?"
+    name = gets.chomp
+    @player = Player.new(name)
+    puts "Hello, #{@player.name}"
+    puts "Your balance is #{@player.balance} $"
+    puts "------------------------------------"
   end
 
   def player_start
