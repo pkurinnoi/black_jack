@@ -7,6 +7,13 @@ class Game
                '4. Fold and restart',
                '----------------------------'].freeze
 
+  MAX_POINT = MAX_POINT
+  AI_TRESHHOLD = 17
+  ACE_COST = 10
+  MAX_CARDS = 3
+  FIRST_HAND = 2
+  MIN_BET = 10
+
   def initialize
     puts "Game created!"
     @bank = 0
@@ -39,7 +46,7 @@ class Game
   end
 
   def game_menu
-    if (@player.cards.length == 3) && (@dealer.cards.length == 3)
+    if (@player.cards.length == MAX_CARDS) && (@dealer.cards.length == MAX_CARDS)
       puts "----------------------------"
       final
     else
@@ -53,10 +60,10 @@ class Game
         game_menu
       when 2
         puts "----------------------------"
-        if @player.cards.length < 3
+        if @player.cards.length < MAX_CARDS
           @player.take_card(@deck.take_first)
         else
-          puts"You have 3 cards in a hand!"
+          puts"You have #{MAX_CARDS} cards in a hand!"
         end
         puts "----------------------------"
         cards_viewer
@@ -76,14 +83,14 @@ class Game
 
   def player_start
     @player.drop_cards
-    2.times do
+    FIRST_HAND.times do
       @player.take_card(@deck.take_first) #берем первую карту из колоды
     end
   end
 
   def dealer_start
     @dealer.drop_cards
-    2.times do
+    FIRST_HAND.times do
       @dealer.take_card(@deck.take_first) #берем первую карту из колоды
     end
   end
@@ -96,13 +103,13 @@ class Game
   end
 
   def first_bet
-    @player.balance >= 10
-    @player.balance=@player.balance - 10
-    @bank += 10
+    @player.balance >= MIN_BET
+    @player.balance=@player.balance - MIN_BET
+    @bank += MIN_BET
 
-    @dealer.balance >= 10
-    @dealer.balance=@dealer.balance - 10
-    @bank += 10
+    @dealer.balance >= MIN_BET
+    @dealer.balance=@dealer.balance - MIN_BET
+    @bank += MIN_BET
 
     puts "#{@player.name} balance is #{@player.balance} $"
     puts "Dealer balance is #{@dealer.balance} $"
@@ -110,7 +117,7 @@ class Game
   end
 
   def dealer_round
-    if (@dealer.calculator < 17) && (@dealer.cards.size < 3)
+    if (@dealer.calculator < AI_TRESHHOLD) && (@dealer.cards.size < MAX_CARDS)
       @dealer.take_card(@deck.take_first)
     end
   end
@@ -140,10 +147,10 @@ class Game
   end
 
   def win_calculator
-    if (@dealer.calculator <= 21) && (@player.calculator <=21) # проверка на превышение 21
-      if (21 - @player.calculator) < (21 - @dealer.calculator) # у игрока ближе к 21 чем у игрока
+    if (@dealer.calculator <= MAX_POINT) && (@player.calculator <=MAX_POINT) # проверка на превышение MAX_POINT
+      if (MAX_POINT - @player.calculator) < (MAX_POINT - @dealer.calculator) # у игрока ближе к MAX_POINT чем у игрока
         player_wins
-      elsif (21 - @player.calculator) > (21 - @dealer.calculator) # у диллера ближе к 21 чем у игрока
+      elsif (MAX_POINT - @player.calculator) > (MAX_POINT - @dealer.calculator) # у диллера ближе к MAX_POINT чем у игрока
         dealer_wins
       elsif @player.calculator == @dealer.calculator # одинаковое количество
         puts "****** Bank split! ******"
@@ -151,7 +158,7 @@ class Game
         @dealer.balance += @bank / 2
         @bank = 0
       end
-    elsif @player.calculator <= 21
+    elsif @player.calculator <= MAX_POINT
       player_wins
     else
       dealer_wins
@@ -172,9 +179,9 @@ class Game
 
   def validate!
     begin
-      raise "Deck is empty" if @deck.deck.length < 4
-      raise "Player balance is too low to start game. Balance: #{@player.balance}" if @player.balance < 10
-      raise "Dealer balance is too low to start the game. Balance #{@dealer.balance}" if @dealer.balance < 10
+      raise "Deck is empty" if @deck.deck.length < MAX_CARDS + 1
+      raise "Player balance is too low to start game. Balance: #{@player.balance}" if @player.balance < MIN_BET
+      raise "Dealer balance is too low to start the game. Balance #{@dealer.balance}" if @dealer.balance < MIN_BET
     end
   end
 end
