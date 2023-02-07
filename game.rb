@@ -7,8 +7,9 @@ class Game
                '4. Fold and restart',
                '----------------------------'].freeze
 
+  PLAYERS = 2
   MAX_POINT = 21
-  AI_TRESHHOLD = 17
+  AI_TRESHOLD = 17
   ACE_COST = 10
   MAX_CARDS = 3
   FIRST_HAND = 2
@@ -120,7 +121,7 @@ class Game
   end
 
   def dealer_round
-    if (@dealer.calculator < AI_TRESHHOLD) && (@dealer.cards.size < MAX_CARDS)
+    if (@dealer.calculator < AI_TRESHOLD) && (@dealer.cards.size < MAX_CARDS)
       @dealer.take_card(@deck.take_first)
     end
   end
@@ -157,8 +158,8 @@ class Game
         dealer_wins
       elsif @player.calculator == @dealer.calculator # одинаковое количество
         puts "****** Bank split! ******"
-        @player.balance += @bank / 2
-        @dealer.balance += @bank / 2
+        @player.balance += @bank / PLAYERS
+        @dealer.balance += @bank / PLAYERS
         @bank = 0
       end
     elsif @player.calculator <= MAX_POINT
