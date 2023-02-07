@@ -16,7 +16,6 @@ class Deck
         @deck << playcard
       end
     end
-    puts "New deck with #{@deck.length} cards successfully created!"
   end
 
   def view
