@@ -16,4 +16,3 @@ class Controller
     end
   end
 end
-

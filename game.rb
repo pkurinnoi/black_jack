@@ -7,7 +7,7 @@ class Game
                '4. Fold and restart',
                '----------------------------'].freeze
 
-  MAX_POINT = MAX_POINT
+  MAX_POINT = 21
   AI_TRESHHOLD = 17
   ACE_COST = 10
   MAX_CARDS = 3

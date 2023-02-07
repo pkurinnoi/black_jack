@@ -3,7 +3,8 @@ class Player
   attr_accessor :name, :balance, :cards, :counter
 
   START_BALANCE = 100
-  ACE_COST = 10
+  ACE_COST_MIN = 1
+  ACE_COST_MAX = 11
 
   def initialize(name)
     @name = name
@@ -30,8 +31,8 @@ class Player
       @sum += card.cost
     end
 
-    if (@costs.include? 1 || @sum <= 11)
-      @sum += ACE_COST
+    if @costs.include? ACE_COST_MIN || @sum <= ACE_COST_MAX
+      @sum += (ACE_COST_MAX - ACE_COST_MIN)
     end
 
     @sum

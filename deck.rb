@@ -19,24 +19,18 @@ class Deck
     puts "New deck with #{@deck.length} cards successfully created!"
   end
 
-  def shuffle
-    @deck = @deck.shuffle()
-  end
-
   def view
     @deck.each do |card|
       puts card.name
     end
   end
 
-  def take_first
-    card = @deck.first
-    drop_first
-    card
+  def shuffle
+    @deck = @deck.shuffle()
   end
 
-  def drop_first
-    @deck = @deck.drop(1)
+  def take_first
+    @deck.pop
   end
 end
 
