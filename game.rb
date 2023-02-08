@@ -19,7 +19,7 @@ class Game
     @bank = 0
     @dealer = Player.new('Dealer')
     @deck = Deck.new
-    @deck.shuffle
+    @deck.deck.shuffle!
     get_name
     game_controller
   end

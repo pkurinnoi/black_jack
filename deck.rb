@@ -24,10 +24,6 @@ class Deck
     end
   end
 
-  def shuffle
-    @deck = @deck.shuffle()
-  end
-
   def take_first
     @deck.pop
   end
